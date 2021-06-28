@@ -2,6 +2,14 @@ console.log('Levantando server');
 
 require('dotenv').config();
 
+
+const mercadopago = require ('mercadopago');
+mercadopago.configure({
+  access_token: process.env.AccessToken,
+  integrator_id: process.env.IntegratorId
+});
+
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -22,6 +30,10 @@ app.get('/', (req, res) => {res.send('El servidor esta corriendo')});
 app.get('/categories/:id', require('./controllers/categories/getCategories'))
 
 app.get('/products/:categoryId', require('./controllers/products/getProducts'))
+
+app.post('/buy', require('./controllers/products/buy'))
+
+app.post('/notificaciones', require('./controllers/notificaciones'));
 
 
 
