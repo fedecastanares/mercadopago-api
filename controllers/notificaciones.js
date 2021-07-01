@@ -1,3 +1,3 @@
 module.exports = async (request, response) => { 
-    console.log(request);
+    console.log(request.body);
 }

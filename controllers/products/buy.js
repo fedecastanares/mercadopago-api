@@ -1,14 +1,21 @@
 const mercadopago = require("mercadopago");
 
 module.exports = async (request, response) => {
+  const mercadopago = require("mercadopago");
+  mercadopago.configure({
+    access_token: process.env.AccessToken,
+    integrator_id: process.env.IntegratorId
+  });
+
   const preference = {
+    //payer: request.body.payer,
     items: request.body.items,
-    payer: request.body.payer,
     back_urls: {
-      success: `http://localhost:3000/success`,
-      pending: `http://localhost:3000/pending`,
-      failure: `http://localhost:3000/failure`,
+      success: `${process.env.URL_FRONT}/success`,
+      pending: `${process.env.URL_FRONT}/pending`,
+      failure: `${process.env.URL_FRONT}/failure`,
     },
+    
     payment_methods: {
       installments: 6,
       excluded_payment_methods: [
@@ -17,11 +24,11 @@ module.exports = async (request, response) => {
         },
       ],
     },
+    
     auto_return: "approved",
     external_reference: "federico.castanares@gmail.com",
+    // notification_url: `${process.env.URL_BACK}/notificaciones`
   };
-
-  // notification_url: 'http://localhost:4000/notificaciones'
 
   mercadopago.preferences
     .create(preference)
