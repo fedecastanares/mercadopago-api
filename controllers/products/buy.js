@@ -27,7 +27,7 @@ module.exports = async (request, response) => {
     
     auto_return: "approved",
     external_reference: "federico.castanares@gmail.com",
-    // notification_url: `${process.env.URL_BACK}/notificaciones`
+    notification_url: `${process.env.URL_BACK}/notificaciones`
   };
 
   mercadopago.preferences
