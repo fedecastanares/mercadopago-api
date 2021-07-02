@@ -7,7 +7,9 @@ module.exports = async (request, response) => {
     integrator_id: process.env.IntegratorId
   });
 
-  const preference4MercadoLibre = {
+  
+
+  const preference = {
     payer: {
       name: "Lalo",
       surname: "Landa",
@@ -40,33 +42,10 @@ module.exports = async (request, response) => {
     auto_return: "approved",
     external_reference: "federico.castanares@gmail.com",
     notification_url: `${process.env.URL_BACK}/notificaciones`
-  }
-
-  const preference = {
-    //payer: request.body.payer,
-    items: request.body.items,
-    back_urls: {
-      success: `${process.env.URL_FRONT}/success`,
-      pending: `${process.env.URL_FRONT}/pending`,
-      failure: `${process.env.URL_FRONT}/failure`,
-    },
-    
-    payment_methods: {
-      installments: 6,
-      excluded_payment_methods: [
-        {
-          id: "amex",
-        },
-      ],
-    },
-    
-    auto_return: "approved",
-    external_reference: "federico.castanares@gmail.com",
-    notification_url: `${process.env.URL_BACK}/notificaciones`
   };
 
   mercadopago.preferences
-    .create(preference4MercadoLibre)
+    .create(preference)
     .then(function (res) {
       // Este valor reemplazará el string "<%= global.id %>" en tu HTML
       global.id = res.body.id;
