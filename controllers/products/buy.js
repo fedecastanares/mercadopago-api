@@ -37,6 +37,11 @@ module.exports = async (request, response) => {
           id: "amex",
         },
       ],
+      excluded_payment_types: [
+        {
+            id: "atm"
+        }
+      ],
     },
     
     auto_return: "approved",
